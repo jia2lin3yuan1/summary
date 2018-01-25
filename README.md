@@ -1,7 +1,7 @@
 # summary
 learning materials summary, including blogs, authors, papers, conference, etc..
 
-## Areas
+## [Areas](Areas.md)
   + Introduction about latest work depends on which area it is. Like Segmentation, Classification, NLP, 3D, Video, etc.
   
 ## Conference
