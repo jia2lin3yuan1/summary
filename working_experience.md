@@ -11,16 +11,19 @@ In this note, it would record the problems I meet in my work and how to solve th
     
   + connect C/C++ array with numpy array in python:
     * Mtd 1: In Cython and Python, claim the numpy array ordered in 'C' alignment.
+     _ in C: 
+     '''c++
+        void c_func(float *arr);
      '''
-        in C: void c_func(float *arr);
-        
-        in Cython: using np.ndarray(type, ndim, mode='c').
+     _ in Cython: using np.ndarray(type, ndim, mode='c').
+     '''
         cdef extern from '***.c' (or '***.h')
             void c_func(float *arr)
         def py_func(np.numpy(float, ndim=1, mode='c') arr not None):
             c_func(arr)
-            
-        in Python: np.array([size], dtype, order='c')
+     '''    
+     _ in Python: np.array([size], dtype, order='c')
+     '''
         from cython_so_fname import py_func
         def myfunc_test():
             arr = np.zeros(10, dtype=np.float32, order='c'
