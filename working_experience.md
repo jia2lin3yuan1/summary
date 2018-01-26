@@ -29,7 +29,46 @@ In this note, it would record the problems I meet in my work and how to solve th
         import numpy as np
         from cython_so_fname import py_func
         def myfunc_test():
-            arr = np.zeros(10, dtype=np.float32, order='c'
+            arr = np.zeros(10, dtype=np.float32, order='c')
             py_func(arr)
-            
+     ```
+   * Mtd 2: In Cython, claim ```np.import_array()```
+     _ in Cython:
+     ```
+        import numpy as np
+        cimport numpy as np
+        np.import_array()
+        cdef extern from '***.c' (or '***.h')
+            void c_func(float *arr)
+        def py_func(arr):
+            c_func(arr)
+     ```    
+     _ in Python:
+     ```
+        import numpy as np
+        from cython_so_fname import py_func
+        def myfunc_test():
+            arr = np.zeros(10, dtype=np.float32)
+            py_func(arr) 
+     ```
+     * Mtd 3: using Vector in C/C++, array in Python to send data.
+     _ in C: 
+     ```c++
+        #include<vector>
+        void c_func(vector<float> arr);
+     ```
+     _ in Cython: using np.ndarray(type, ndim, mode='c').
+     ```
+        cdef extern from '***.c' (or '***.h')
+            void c_func(vector<float> arr)
+        def py_func(arr):
+            c_func(arr)
+     ```    
+     _ in Python: np.array([size], dtype, order='c')
+     ```
+        import numpy as np
+        from cython_so_fname import py_func
+        def myfunc_test():
+            arr = np.zeros(10, dtype=np.float32)
+            py_func(arr)
      ```
