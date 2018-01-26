@@ -32,7 +32,7 @@ In this note, it would record the problems I meet in my work and how to solve th
             arr = np.zeros(10, dtype=np.float32, order='c')
             py_func(arr)
      ```
-   * Mtd 2: In Cython, claim ```np.import_array()```
+    * Mtd 2: In Cython, claim ```np.import_array()```
      _ in Cython:
      ```
         import numpy as np
