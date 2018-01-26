@@ -17,6 +17,8 @@ In this note, it would record the problems I meet in my work and how to solve th
      ```
      _ in Cython: using np.ndarray(type, ndim, mode='c').
      ```
+        import numpy as np
+        cimport numpy as np
         cdef extern from '***.c' (or '***.h')
             void c_func(float *arr)
         def py_func(np.numpy(float, ndim=1, mode='c') arr not None):
@@ -24,6 +26,7 @@ In this note, it would record the problems I meet in my work and how to solve th
      ```    
      _ in Python: np.array([size], dtype, order='c')
      ```
+        import numpy as np
         from cython_so_fname import py_func
         def myfunc_test():
             arr = np.zeros(10, dtype=np.float32, order='c'
