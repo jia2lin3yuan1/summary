@@ -72,3 +72,4 @@ In this note, it would record the problems I meet in my work and how to solve th
             arr = np.zeros(10, dtype=np.float32)
             py_func(arr)
      ```
+  + cimport and import <http://blog.yclin.me/gsoc/2016/06/08/difference-between-float64-and-float64_t/>
