@@ -78,8 +78,8 @@ In this note, it would record the problems I meet in my work and how to solve th
 ## 20180204, C++ programming
   + sort a std::vector, and return index .
   ```
-    vector<int> arg_sort(vertex<int> v){
-        // initialize original index locations
+  vector<int> arg_sort(vertex<int> v){
+    // initialize original index locations
     vector<size_t> idx(v.size());
     iota(idx.begin(), idx.end(), 0);
 
