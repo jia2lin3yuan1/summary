@@ -16,7 +16,7 @@ In this note, it would record the problems I meet in my work and how to solve th
         void c_func(float *arr);
      ```
      _ in Cython: using np.ndarray(type, ndim, mode='c').
-     ```
+     ```cython
         import numpy as np
         cimport numpy as np
         cdef extern from '***.c' (or '***.h')
@@ -25,7 +25,7 @@ In this note, it would record the problems I meet in my work and how to solve th
             c_func(arr)
      ```    
      _ in Python: np.array([size], dtype, order='c')
-     ```
+     ```python
         import numpy as np
         from cython_so_fname import py_func
         def myfunc_test():
@@ -34,7 +34,7 @@ In this note, it would record the problems I meet in my work and how to solve th
      ```
     * Mtd 2: In Cython, claim ```np.import_array()```
      _ in Cython:
-     ```
+     ```cython
         import numpy as np
         cimport numpy as np
         np.import_array()
@@ -44,7 +44,7 @@ In this note, it would record the problems I meet in my work and how to solve th
             c_func(arr)
      ```    
      _ in Python:
-     ```
+     ```python
         import numpy as np
         from cython_so_fname import py_func
         def myfunc_test():
