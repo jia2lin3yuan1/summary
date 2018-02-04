@@ -73,3 +73,22 @@ In this note, it would record the problems I meet in my work and how to solve th
             py_func(arr)
      ```
   + cimport and import <http://blog.yclin.me/gsoc/2016/06/08/difference-between-float64-and-float64_t/>
+  
+  
+## 20180204, C++ programming
+  + sort a std::vector, and return index .
+  ```
+    vector<int> arg_sort(vertex<int> v){
+        // initialize original index locations
+    vector<size_t> idx(v.size());
+    iota(idx.begin(), idx.end(), 0);
+
+    // sort indexes based on comparing values in v
+    sort(idx.begin(), idx.end(),
+         [&v](size_t i1, size_t i2) {return v[i1] < v[i2];});
+         
+    return idx;
+       
+  }
+
+  ```
