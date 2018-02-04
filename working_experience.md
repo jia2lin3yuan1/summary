@@ -58,14 +58,14 @@ In this note, it would record the problems I meet in my work and how to solve th
         void c_func(vector<float> arr);
      ```
      _ in Cython: using np.ndarray(type, ndim, mode='c').
-     ```
+     ```cython
         cdef extern from '***.c' (or '***.h')
             void c_func(vector<float> arr)
         def py_func(arr):
             c_func(arr)
      ```    
      _ in Python: np.array([size], dtype, order='c')
-     ```
+     ```python
         import numpy as np
         from cython_so_fname import py_func
         def myfunc_test():
@@ -77,15 +77,14 @@ In this note, it would record the problems I meet in my work and how to solve th
   
 ## 20180204, C++ programming
   + sort a std::vector, and return index .
-  ```
+  ```c++
   vector<int> arg_sort(vertex<int> v){
     // initialize original index locations
     vector<size_t> idx(v.size());
     iota(idx.begin(), idx.end(), 0);
 
     // sort indexes based on comparing values in v
-    sort(idx.begin(), idx.end(),
-         [&v](size_t i1, size_t i2) {return v[i1] < v[i2];});
+    sort(idx.begin(), idx.end(), [&v](size_t i1, size_t i2) {return v[i1] < v[i2];});
          
     return idx;
        
