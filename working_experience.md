@@ -97,5 +97,5 @@ In this note, it would record the problems I meet in my work and how to solve th
   <https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html>
   <https://docs.nvidia.com/deeplearning/sdk/cudnn-install/index.html#installdriver>
   + Install Sougou PInyin
-  <https://xunyunliu.github.io/post/install_sogou/>
+  <https://blog.csdn.net/ljheee/article/details/52966456>
 
