@@ -44,127 +44,119 @@ service lightdm stop  # if it doesn't work, try:  sudo /etc/init.d/lightdm stop.
     ```
    - The downloaded file is a package of the following three components:
    1. an NVIDIA driver installer, but usually of stale version;
-2. the actual CUDA installer;
-3. the CUDA samples installer;
+   2. the actual CUDA installer;
+   3. the CUDA samples installer;
+   
+   - I suggest extracting the above three components and executing 2 and 3 separately (remember we installed the driver ourselves already). To extract them, execute the runfile installer with `--extract` option:
+    ```
+    cd
+    chmod +x cuda_9.0.176_384.81_linux-run
+    ./cuda_9.0.176_384.81_linux-run --extract=$HOME
+    ```
+    You should have unpacked three components:
+    `NVIDIA-Linux-x86_64-384.81.run` (1. NVIDIA driver that we ignore),
+    `cuda-linux.9.0.176-22781540.run` (2. CUDA 9.0 installer), and
+    `cuda-samples.9.0.176-22781540-linux.run` (3. CUDA 9.0 Samples).
 
-I suggest extracting the above three components and executing 2 and 3 separately (remember we installed the driver ourselves already). To extract them, execute the runfile installer with `--extract` option:
+    Execute the second one to install the CUDA Toolkit 9.0:
 
-```
-cd
-chmod +x cuda_9.0.176_384.81_linux-run
-./cuda_9.0.176_384.81_linux-run --extract=$HOME
-```
+    ```
+    sudo ./cuda-linux.9.0.176-22781540.run
+    ```
 
-You should have unpacked three components:
-`NVIDIA-Linux-x86_64-384.81.run` (1. NVIDIA driver that we ignore),
-`cuda-linux.9.0.176-22781540.run` (2. CUDA 9.0 installer), and
-`cuda-samples.9.0.176-22781540-linux.run` (3. CUDA 9.0 Samples).
+    You now have to accept the license by scrolling down to the bottom (hit the "d" key on your keyboard) and enter "accept". Next accept the defaults.
 
-Execute the second one to install the CUDA Toolkit 9.0:
+    To verify our CUDA installation, install the sample tests by
 
-```
-sudo ./cuda-linux.9.0.176-22781540.run
-```
+    ```
+    sudo ./cuda-samples.9.0.176-22781540-linux.run
+    ```
 
-You now have to accept the license by scrolling down to the bottom (hit the "d" key on your keyboard) and enter "accept". Next accept the defaults.
+    - After the installation finishes, configure the runtime library. 
 
-To verify our CUDA installation, install the sample tests by
+    ```
+    sudo bash -c "echo /usr/local/cuda/lib64/ > /etc/ld.so.conf.d/cuda.conf"
+    sudo ldconfig
+    ```
 
-```
-sudo ./cuda-samples.9.0.176-22781540-linux.run
-```
+    It is also recommended for Ubuntu users to append string `/usr/local/cuda/bin` to system file `/etc/environments` so that `nvcc` will be included in `$PATH`. This will take effect after reboot. To do that, you just have to
 
-After the installation finishes, configure the runtime library. 
+    ```
+    sudo vim /etc/environments
+    ```
 
-```
-sudo bash -c "echo /usr/local/cuda/lib64/ > /etc/ld.so.conf.d/cuda.conf"
-sudo ldconfig
-```
+    and then add `:/usr/local/cuda/bin` (including the ":") at the end of the PATH="/blah:/blah/blah" string (inside the quotes). 
+    After a `reboot`, let's test our installation by making and invoking our tests:
+    ```
+    cd /usr/local/cuda-9.0/samples
+    sudo make
+    ```
 
-It is also recommended for Ubuntu users to append string `/usr/local/cuda/bin` to system file `/etc/environments` so that `nvcc` will be included in `$PATH`. This will take effect after reboot. To do that, you just have to
+    It's a long process with many irrelevant warnings about deprecated architectures (`sm_20` and such ancient GPUs). After it completes, run `deviceQuery` and `p2pBandwidthLatencyTest`:
 
-```
-sudo vim /etc/environments
-```
+    ```
+    cd /usr/local/cuda/samples/bin/x86_64/linux/release
+    ./deviceQuery
+    ```
 
-and then add `:/usr/local/cuda/bin` (including the ":") at the end of the PATH="/blah:/blah/blah" string (inside the quotes). 
-After a `reboot`, let's test our installation by making and invoking our tests:
-```
-cd /usr/local/cuda-9.0/samples
-sudo make
-```
+    The result of running `deviceQuery` should look something like this:
 
-It's a long process with many irrelevant warnings about deprecated architectures (`sm_20` and such ancient GPUs). After it completes, run `deviceQuery` and `p2pBandwidthLatencyTest`:
+    ```
+    ./deviceQuery Starting...
 
-```
-cd /usr/local/cuda/samples/bin/x86_64/linux/release
-./deviceQuery
-```
+     CUDA Device Query (Runtime API) version (CUDART static linking)
 
-The result of running `deviceQuery` should look something like this:
+    Detected 1 CUDA Capable device(s)
 
-```
-./deviceQuery Starting...
+    Device 0: "GeForce GTX 1060"
+      CUDA Driver Version / Runtime Version          9.0 / 9.0
+      CUDA Capability Major/Minor version number:    6.1
+      Total amount of global memory:                 6073 MBytes (6367739904 bytes)
+      (10) Multiprocessors, (128) CUDA Cores/MP:     1280 CUDA Cores
+      GPU Max Clock rate:                            1671 MHz (1.67 GHz)
+      Memory Clock rate:                             4004 Mhz
+      Memory Bus Width:                              192-bit
+      L2 Cache Size:                                 1572864 bytes
+      Maximum Texture Dimension Size (x,y,z)         1D=(131072), 2D=(131072, 65536), 3D=(16384, 16384, 16384)
+      Maximum Layered 1D Texture Size, (num) layers  1D=(32768), 2048 layers
+      Maximum Layered 2D Texture Size, (num) layers  2D=(32768, 32768), 2048 layers
+      Total amount of constant memory:               65536 bytes
+      Total amount of shared memory per block:       49152 bytes
+      Total number of registers available per block: 65536
+      Warp size:                                     32
+      Maximum number of threads per multiprocessor:  2048
+      Maximum number of threads per block:           1024
+      Max dimension size of a thread block (x,y,z): (1024, 1024, 64)
+      Max dimension size of a grid size    (x,y,z): (2147483647, 65535, 65535)
+      Maximum memory pitch:                          2147483647 bytes
+      Texture alignment:                             512 bytes
+      Concurrent copy and kernel execution:          Yes with 2 copy engine(s)
+      Run time limit on kernels:                     Yes
+      Integrated GPU sharing Host Memory:            No
+      Support host page-locked memory mapping:       Yes
+      Alignment requirement for Surfaces:            Yes
+      Device has ECC support:                        Disabled
+      Device supports Unified Addressing (UVA):      Yes
+      Supports Cooperative Kernel Launch:            Yes
+      Supports MultiDevice Co-op Kernel Launch:      Yes
+      Device PCI Domain ID / Bus ID / location ID:   0 / 1 / 0
+      Compute Mode:
+         < Default (multiple host threads can use ::cudaSetDevice() with device simultaneously) >
 
- CUDA Device Query (Runtime API) version (CUDART static linking)
+    deviceQuery, CUDA Driver = CUDART, CUDA Driver Version = 9.0, CUDA Runtime Version = 9.0, NumDevs = 1
+    Result = PASS
+    ```
 
-Detected 1 CUDA Capable device(s)
+    Cleanup: if ./deviceQuery works, remember to `rm` the 4 files (1 downloaded and 3 extracted). 
 
-Device 0: "GeForce GTX 1060"
-  CUDA Driver Version / Runtime Version          9.0 / 9.0
-  CUDA Capability Major/Minor version number:    6.1
-  Total amount of global memory:                 6073 MBytes (6367739904 bytes)
-  (10) Multiprocessors, (128) CUDA Cores/MP:     1280 CUDA Cores
-  GPU Max Clock rate:                            1671 MHz (1.67 GHz)
-  Memory Clock rate:                             4004 Mhz
-  Memory Bus Width:                              192-bit
-  L2 Cache Size:                                 1572864 bytes
-  Maximum Texture Dimension Size (x,y,z)         1D=(131072), 2D=(131072, 65536), 3D=(16384, 16384, 16384)
-  Maximum Layered 1D Texture Size, (num) layers  1D=(32768), 2048 layers
-  Maximum Layered 2D Texture Size, (num) layers  2D=(32768, 32768), 2048 layers
-  Total amount of constant memory:               65536 bytes
-  Total amount of shared memory per block:       49152 bytes
-  Total number of registers available per block: 65536
-  Warp size:                                     32
-  Maximum number of threads per multiprocessor:  2048
-  Maximum number of threads per block:           1024
-  Max dimension size of a thread block (x,y,z): (1024, 1024, 64)
-  Max dimension size of a grid size    (x,y,z): (2147483647, 65535, 65535)
-  Maximum memory pitch:                          2147483647 bytes
-  Texture alignment:                             512 bytes
-  Concurrent copy and kernel execution:          Yes with 2 copy engine(s)
-  Run time limit on kernels:                     Yes
-  Integrated GPU sharing Host Memory:            No
-  Support host page-locked memory mapping:       Yes
-  Alignment requirement for Surfaces:            Yes
-  Device has ECC support:                        Disabled
-  Device supports Unified Addressing (UVA):      Yes
-  Supports Cooperative Kernel Launch:            Yes
-  Supports MultiDevice Co-op Kernel Launch:      Yes
-  Device PCI Domain ID / Bus ID / location ID:   0 / 1 / 0
-  Compute Mode:
-     < Default (multiple host threads can use ::cudaSetDevice() with device simultaneously) >
+ + Install cuDNN 7.0
+  * The recommended way for installing cuDNN is to 
+    1. Download the "cuDNN v7.0.5 Library for Linux" `tgz` file (need to register for an Nvidia account).
+    2. `sudo mv` the downloaded archive to `/usr/local`. This might seem silly at first, but when you unzip it next you will see that the contents end up going to various folders under `/usr/local/cuda` and would be messy to move otherwise.
+    3. Then `cd /usr/local` and extract the `tgz` by
+    ```
+    sudo tar -xvzf cudnn-9.0-linux-x64-v7.tgz
+    ```
+    4. Finally, execute `sudo ldconfig` to update the shared library cache.
 
-deviceQuery, CUDA Driver = CUDART, CUDA Driver Version = 9.0, CUDA Runtime Version = 9.0, NumDevs = 1
-Result = PASS
-```
-
-Cleanup: if ./deviceQuery works, remember to `rm` the 4 files (1 downloaded and 3 extracted). 
-
-## Install cuDNN 7.0
-
-The recommended way for installing cuDNN is to 
-
-1. Download the "cuDNN v7.0.5 Library for Linux" `tgz` file (need to register for an Nvidia account).
-
-2. `sudo mv` the downloaded archive to `/usr/local`. This might seem silly at first, but when you unzip it next you will see that the contents end up going to various folders under `/usr/local/cuda` and would be messy to move otherwise.
-
-3. Then `cd /usr/local` and extract the `tgz` by
-
-```
-sudo tar -xvzf cudnn-9.0-linux-x64-v7.tgz
-```
-
-4. Finally, execute `sudo ldconfig` to update the shared library cache.
-
-5. Clean up now or later by `sudo rm cudnn-9.0-linux-x64-v7.tgz`
+    5. Clean up now or later by `sudo rm cudnn-9.0-linux-x64-v7.tgz`
