@@ -25,13 +25,13 @@ service lightdm stop  # if it doesn't work, try:  sudo /etc/init.d/lightdm stop.
       ```
 
   *  Install NVIDIA drivers.
-    - Now install back the drivers. I highly recommend staying away from the drivers on NVIDIA’s website. For drivers that have been tested and packaged by Ubuntu volunteers, there are two options: current and current-updates.
-    - Current is what was well tested and shipped with the Ubuntu version you are using. It may be pretty old. current-updates is a package that is drawn from NVIDIA’s releases, but is tested and packaged by Ubuntu. This is pretty safe.
-    - Depending on what you pick, the install is:
+    1. Now install back the drivers. I highly recommend staying away from the drivers on NVIDIA’s website. For drivers that have been tested and packaged by Ubuntu volunteers, there are two options: current and current-updates.
+    2. Current is what was well tested and shipped with the Ubuntu version you are using. It may be pretty old. current-updates is a package that is drawn from NVIDIA’s releases, but is tested and packaged by Ubuntu. This is pretty safe.
+    3. Depending on what you pick, the install is:
       ```
       sudo apt-get install nvidia-current-updates nvidia-settings-updates
       ```
-    - Then, run 'nvidia-smi' to verify if it is successfully installed and 'sudo reboot' to restart the computer if yes.
+    4. Then, run 'nvidia-smi' to verify if it is successfully installed and 'sudo reboot' to restart the computer if yes.
   
 + Install CUDA.
   * Installing CUDA from runfile is much simpler and smoother than installing the NVIDIA driver. It just involves copying files to system directories and has nothing to do with the system kernel or online complilation. I personally does not recommend adding NVIDIA's repositories and install CUDA via apt-get or other package managers as it will not reduce the complexity of installation or uninstallation but increase the risk of messing up the configurations for repositories.
