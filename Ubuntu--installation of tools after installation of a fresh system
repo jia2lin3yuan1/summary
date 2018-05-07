@@ -1,0 +1,3 @@
++ Add source to source list.
++ Install vim: ```sudo apt-get install vim```. And install a fantastic vim configuration, like follow [my-vim-runtime](https://github.com/encorechow/my-vim-runtime/tree/master/.vim_runtime) from encorechow.
++ If using python, follow
