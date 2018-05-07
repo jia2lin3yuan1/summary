@@ -1,6 +1,7 @@
 ## Install Nvidia driver.
-  The summary is based on two blogs [How to fix NVIDIA driver failure on Ubuntu](https://codeyarns.com/2013/02/07/how-to-fix-nvidia-driver-failure-on-ubuntu/) and [Install NVIDIA Driver and CUDA](https://gist.github.com/zhanwenchen/e520767a409325d9961072f666815bb8).
-  
+  The summary is based on blogs [Remove nouveau and install nvidia Driver in Ubuntu 15.04](http://www.allaboutlinux.eu/remove-nouveau-and-install-nvidia-driver-in-ubuntu-15-04/),  [How to fix NVIDIA driver failure on Ubuntu](https://codeyarns.com/2013/02/07/how-to-fix-nvidia-driver-failure-on-ubuntu/) and [Install NVIDIA Driver and CUDA](https://gist.github.com/zhanwenchen/e520767a409325d9961072f666815bb8).
++ If you got a fresh Ubuntu system, the default driver might be 'nouveau'. In this way, you would need to remove nouveau first. Follow instructions in [Remove nouveau and install nvidia Driver in Ubuntu 15.04](http://www.allaboutlinux.eu/remove-nouveau-and-install-nvidia-driver-in-ubuntu-15-04/). The method works equally for Ubuntu 16.04.
+  
 + Switch to the command-line mode with <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>F1</kbd> or <kbd>F2</kbd> ... or <kbd>F6</kbd>, and stop the service lightdm.
 ```
 service lightdm stop  # if it doesn't work, try:  sudo /etc/init.d/lightdm stop.
