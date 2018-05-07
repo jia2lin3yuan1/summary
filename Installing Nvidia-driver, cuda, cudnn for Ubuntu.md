@@ -34,7 +34,8 @@ service lightdm stop  # if it doesn't work, try:  sudo /etc/init.d/lightdm stop.
       ```
       
     - Then, run 'nvidia-smi' to verify if it is successfully installed and 'sudo reboot' to restart the computer if yes.
-  
+
+
 + Install CUDA.
   * Installing CUDA from runfile is much simpler and smoother than installing the NVIDIA driver. It just involves copying files to system directories and has nothing to do with the system kernel or online complilation. I personally does not recommend adding NVIDIA's repositories and install CUDA via apt-get or other package managers as it will not reduce the complexity of installation or uninstallation but increase the risk of messing up the configurations for repositories.
   
