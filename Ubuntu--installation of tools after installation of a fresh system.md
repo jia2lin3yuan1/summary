@@ -3,4 +3,5 @@
 + If using python, install virtualenv, virtualenvwrapper following [Install virtualenv and virtualenvwrapper on Ubuntu](http://exponential.io/blog/2015/02/10/install-virtualenv-and-virtualenvwrapper-on-ubuntu/)
 + Install visual studio code as editor.
 + If from China, install Sougou PInyin w.r.t. <https://blog.csdn.net/ljheee/article/details/52966456>
-+ Install Git, a version management tool
++ Install Git, a version management tool.
++ Install of TeamViewer, which is a great remote connecter.
