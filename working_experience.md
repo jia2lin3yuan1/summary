@@ -91,11 +91,5 @@ In this note, it would record the problems I meet in my work and how to solve th
   }
 
   ```
-## 20180423, 装机Note (Ubuntu)
-  + Install Nvidia Driver, then Cuda, then cudnn.
-  <https://gist.github.com/wangruohui/df039f0dc434d6486f5d4d098aa52d07>
-  <https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html>
-  <https://docs.nvidia.com/deeplearning/sdk/cudnn-install/index.html#installdriver>
-  + Install Sougou PInyin
-  <https://blog.csdn.net/ljheee/article/details/52966456>
+
 
