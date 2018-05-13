@@ -5,3 +5,4 @@
 + If from China, install Sougou PInyin w.r.t. <https://blog.csdn.net/ljheee/article/details/52966456>
 + Install Git, a version management tool.
 + Install of TeamViewer, which is a great remote connecter.
++ Install of opencv (not for python):sudo apt-get install libopencv-dev 
