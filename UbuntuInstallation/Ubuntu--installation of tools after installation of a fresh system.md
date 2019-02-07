@@ -16,3 +16,5 @@
 + Install Git, a version management tool.
 + Install of TeamViewer, which is a great remote connecter.
 + Install of opencv (not for python):sudo apt-get install libopencv-dev 
++ Install Kompare, for comparing different files.
++ Install Kazam, for screen installing.
