@@ -46,6 +46,7 @@ service lightdm stop  # if it doesn't work, try:  sudo /etc/init.d/lightdm stop.
     cd
     wget https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda_9.0.176_384.81_linux-run
     ```
+   - Download [cuda 9.0](wget https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda_9.0.176_384.81_linux-run)
    - The downloaded file is a package of the following three components:
    1. an NVIDIA driver installer, but usually of stale version;
    2. the actual CUDA installer;
