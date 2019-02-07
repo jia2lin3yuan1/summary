@@ -18,3 +18,8 @@
 + Install of opencv (not for python):sudo apt-get install libopencv-dev 
 + Install Kompare, for comparing different files.
 + Install Kazam, for screen installing.
+```
+sudo apt-add-repository ppa:sylvain-pineau/kazam
+sudo apt-get update
+sudo apt-get install kazam 
+```
