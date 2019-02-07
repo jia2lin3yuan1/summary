@@ -154,6 +154,7 @@ service lightdm stop  # if it doesn't work, try:  sudo /etc/init.d/lightdm stop.
     Cleanup: if ./deviceQuery works, remember to `rm` the 4 files (1 downloaded and 3 extracted). 
 
  + Install cuDNN 7.0
+  * Refering to this link to install [cuDNN7.3 (serves for cuda 10.0)](https://medium.com/@vitali.usau/install-cuda-10-0-cudnn-7-3-and-build-tensorflow-gpu-from-source-on-ubuntu-18-04-3daf720b83fe)
   * The recommended way for installing cuDNN is to 
     1. Download the "cuDNN v7.0.5 Library for Linux" `tgz` file (need to register for an Nvidia account).
     2. `sudo mv` the downloaded archive to `/usr/local`. This might seem silly at first, but when you unzip it next you will see that the contents end up going to various folders under `/usr/local/cuda` and would be messy to move otherwise.
